@@ -1,0 +1,58 @@
+
+
+.wrapper {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 90vh;
+    .state {
+        height: 40%;
+    }
+    .dob {
+        background-color: aqua;
+        position: relative;
+        overflow: hidden;
+        input[type="text"] {
+            width: 100%;
+            border: none;
+            outline: none;
+            padding-top: 20px;
+            &:focus + label span#label-name, 
+            &:valid + label span#label-name {
+                transform: translateY(-120%);
+                font-size: 12px;
+            }
+            &:focus + label::after,
+            &:valid + label::after {
+                transform: translateX(0%);
+            }
+        }
+        label {
+            font-size: 14px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-bottom: 1px solid black;
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -1px;
+                border-bottom: 3px solid rgb(13, 187, 172);
+                width: 100%;
+                height: 100%;
+                transform: translateX(-100%);
+                transition: all .3s ease;
+            }
+            span#label-name {
+                position: absolute;
+                bottom: 3px;
+                transition: all .3s ease;
+            }
+        }
+    }
+}

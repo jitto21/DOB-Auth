@@ -1,0 +1,17 @@
+<div class="container">
+    <form>
+        <div class="wrapper">
+            <div class="state">
+                <select name="" id="">
+                    <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+                </select>
+            </div>
+            <div class="dob">
+                <input appDobDirective type="text" id="dob" required>
+                <label for="dob">
+                    <span id="label-name">D.O.B (mm/dd/yyyy)</span>
+                </label>
+            </div>
+        </div>
+    </form>
+</div>

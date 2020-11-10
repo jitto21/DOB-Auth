@@ -1,17 +1,44 @@
 <div class="container">
-    <form>
+    <form [formGroup]="dobForm" (submit)="onSubmit()">
+
         <div class="wrapper">
+
             <div class="state">
-                <select name="" id="">
+                <select id="" formControlName="state">
                     <option *ngFor="let state of states" [value]="state">{{ state }}</option>
                 </select>
             </div>
-            <div class="dob">
-                <input appDobDirective type="text" id="dob" required>
-                <label for="dob">
-                    <span id="label-name">D.O.B (mm/dd/yyyy)</span>
-                </label>
+
+            <div class="dob-wrapper">
+
+                <div class="dob">
+                    <input appDobDirective type="text" id="dob" formControlName="dob">
+                    <label for="dob">
+                        <span id="label-name">D.O.B (mm/dd/yyyy)</span>
+                    </label>
+                </div>
+
+                <div *ngIf="dobForm.get('dob').errors" class="errors">
+                    <p>
+                        <span *ngIf="dobForm.get('dob').errors?.dobIncorrect">D.O.B is Invalid</span>
+                        <span *ngIf="dobForm.get('dob').errors?.required && dobForm.get('dob').touched">D.O.B is Required</span>
+                        <span *ngIf="dobForm.get('dob').errors?.pattern && !dobForm.get('dob').errors?.dobIncorrect">D.O.B should only contain numbers</span>
+                    </p>
+                </div>
+
             </div>
+
+            <div class="display" *ngIf="dobForm.valid && isLength10">
+                <h4>My Selections</h4>
+                <p>State: {{ dobForm.get('state').value }}</p>
+                <p>D.O.B: {{ dobForm.get('dob').value.substr(0,10) }}</p>
+            </div>
+
+
+        </div>
+
+        <div class="btn-wrapper">
+            <button [disabled]="!dobForm.valid" type="submit">Submit</button>
         </div>
     </form>
 </div>

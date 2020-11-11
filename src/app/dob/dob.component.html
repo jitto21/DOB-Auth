@@ -12,7 +12,7 @@
             <div class="dob-wrapper">
 
                 <div class="dob">
-                    <input appDobDirective type="text" id="dob" formControlName="dob">
+                    <input appDigitsOnly appDobDirective type="text" id="dob" formControlName="dob" maxlength="10">
                     <label for="dob">
                         <span id="label-name">D.O.B (mm/dd/yyyy)</span>
                     </label>
@@ -31,7 +31,7 @@
             <div class="display" *ngIf="dobForm.valid && isLength10">
                 <h4>My Selections</h4>
                 <p>State: {{ dobForm.get('state').value }}</p>
-                <p>D.O.B: {{ dobForm.get('dob').value.substr(0,10) }}</p>
+                <p>D.O.B: {{ dobForm.get('dob').value }}</p>
             </div>
 
 

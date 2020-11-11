@@ -65,15 +65,11 @@ export class DobComponent implements OnInit {
   }
 
   onSubmit() {
-    let obj = {
-      state: this.dobForm.get('state').value,
-      dob: this.dobForm.get('dob').value.substr(0,10)
-    }
-    console.log(obj);
+    console.log(this.dobForm.value);
   }
 
   dobValidator(control: FormControl): null | {[key: string]: boolean} {
-    const dob = control.value ? control.value.substr(0,10) : '';
+    const dob = control.value ? control.value : '';
     if(dob && dob.length == 10) {
       this.isLength10 = true;
       const dobArr: string[] = dob.split('/'); 
@@ -85,6 +81,7 @@ export class DobComponent implements OnInit {
       console.log(new Date().getTime() <= new Date([...dobArr].reverse().join('-')).getTime());
       console.log(+dobArr[0] > 12);
       console.log(+dobArr[1] > this.days[ +(dobArr[0]) - 1 ]);
+      console.log(dobArr);
       // console.log(new Date().getTime() <= new Date(dobArr.reverse().join('-')).getTime());
       const isLeap = +dobArr[2]%100===0 ? +dobArr[2]%400===0 : +dobArr[2]%4===0; // leap year check
       this.days[1] = isLeap ? 29 : 28; // if (leap year) ==> make days of Feb as '29'

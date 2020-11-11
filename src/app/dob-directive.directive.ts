@@ -9,17 +9,14 @@ export class DobDirectiveDirective {
   @HostListener('input', ['$event'])
   onKeyDown(event) {
     if (event.data) { //ignores entire code on backspace
-      const inputValue = event.target as HTMLInputElement
+      const inputValue = event.target as HTMLInputElement;
       let trimmedValue: string = inputValue.value.replace(/\s+/g, ''); //removing space
-      // console.log("Length: ", trimmedValue.length);
-      // if (trimmedValue.length >= 10) { //restricts on length: 10
-      //   console.log("10");
-      //   trimmedValue = trimmedValue.substr(0, 10);
-      //   inputValue.value = trimmedValue.substr(0, 10);
-      // }
-      console.log("hi");
+      if (trimmedValue.length >= 10) { //restricts on length: 10
+        console.log("10");
+        trimmedValue = trimmedValue.substr(0, 10);
+        inputValue.value = trimmedValue.substr(0, 10);
+      }
       trimmedValue = trimmedValue.replace(/\//g, '');
-      // console.log("trimmedValue: ", trimmedValue);
       let mod1 = '';
       let mod2 = '';
       if (trimmedValue.length >= 2) { //for month

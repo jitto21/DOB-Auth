@@ -16,19 +16,29 @@ export class DobDirectiveDirective {
         trimmedValue = trimmedValue.substr(0, 10);
         inputValue.value = trimmedValue.substr(0, 10);
       }
-      trimmedValue = trimmedValue.replace(/\//g, '');
-      let mod1 = '';
-      let mod2 = '';
-      if (trimmedValue.length >= 2) { //for month
-        mod1 = trimmedValue.substring(0, 2) + '/' + trimmedValue.substr(2);
-        // console.log("mod1: ", mod1);
-        inputValue.value = mod1;
+      else {
+        if (trimmedValue.match(/^\d{2}$/)) {
+          console.log("2");
+          inputValue.value = trimmedValue + '/';
+        }
+        else if (trimmedValue.match(/^\d{2}\/\d{2}$/)) {
+          console.log("4");
+          inputValue.value = trimmedValue + '/';
+        }
       }
-      if (mod1.length >= 5) { //for year based on month
-        mod2 = mod1.substring(0, 5) + '/' + mod1.substr(5);
-        // console.log("mod2: ", mod2);
-        inputValue.value = mod2;
-      }
+
+      // let mod1 = '';
+      // let mod2 = '';
+      // if (trimmedValue.length >= 2) { //for month
+      //   mod1 = trimmedValue.substring(0, 2) + '/' + trimmedValue.substr(2);
+      //   // console.log("mod1: ", mod1);
+      //   inputValue.value = mod1;
+      // }
+      // if (mod1.length >= 5) { //for year based on month
+      //   mod2 = mod1.substring(0, 5) + '/' + mod1.substr(5);
+      //   // console.log("mod2: ", mod2);
+      //   inputValue.value = mod2;
+      // }
     }
 
   }

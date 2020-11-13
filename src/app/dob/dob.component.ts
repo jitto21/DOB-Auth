@@ -56,12 +56,22 @@ export class DobComponent implements OnInit {
       'dob': new FormControl(null, 
         [ 
           Validators.required, 
-          Validators.pattern('[0-9/]+'),
+          Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/g),
           Validators.maxLength(10),
           Validators.minLength(10),
           this.dobValidator.bind(this)
         ])
     })
+
+    // this.dobForm.get('dob').valueChanges.subscribe((value: string) => {
+    //   console.log(value);
+    //   if(value.match(/^\d{2}$/)) {
+    //     this.dobForm.patchValue({'dob': value+'/'});
+    //   }
+    //   else if(value.match(/^\d{2}\/\d{2}$/)) {
+    //     this.dobForm.patchValue({'dob': value+'/'});
+    //   }
+    // })
   }
 
   onSubmit() {
@@ -78,19 +88,20 @@ export class DobComponent implements OnInit {
           dobArr[1] ==> day
           dobArr[2] ==> year
       */
-      console.log(new Date().getTime() <= new Date([...dobArr].reverse().join('-')).getTime());
-      console.log(+dobArr[0] > 12);
-      console.log(+dobArr[1] > this.days[ +(dobArr[0]) - 1 ]);
-      console.log(dobArr);
-      // console.log(new Date().getTime() <= new Date(dobArr.reverse().join('-')).getTime());
+
       const isLeap = +dobArr[2]%100===0 ? +dobArr[2]%400===0 : +dobArr[2]%4===0; // leap year check
       this.days[1] = isLeap ? 29 : 28; // if (leap year) ==> make days of Feb as '29'
+
+      console.log(new Date().getTime() <= new Date([dobArr[2], dobArr[0], dobArr[1]].join('-')).getTime());
+      console.log(+dobArr[0] > 12);
+      console.log(+dobArr[1] > this.days[ +(dobArr[0]) - 1 ]);
+
       if(+dobArr[0] > 12 || +dobArr[1] > this.days[ +(dobArr[0]) - 1 ] ||
-        new Date().getTime() <= new Date([...dobArr].reverse().join('-')).getTime()) {
+        new Date().getTime() <= new Date([dobArr[2], dobArr[0], dobArr[1]].join('-')).getTime()) {
         console.log("Invalid date");
         return {'dobIncorrect': true};
       }
-    }
+    } else { this.isLength10 = false;}
     return null; 
   }
 

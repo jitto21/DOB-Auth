@@ -22,7 +22,7 @@
                     <p>
                         <span *ngIf="dobForm.get('dob').errors?.dobIncorrect">D.O.B is Invalid</span>
                         <span *ngIf="dobForm.get('dob').errors?.required && dobForm.get('dob').touched">D.O.B is Required</span>
-                        <span *ngIf="dobForm.get('dob').errors?.pattern && !dobForm.get('dob').errors?.dobIncorrect">D.O.B should only contain numbers</span>
+                        <span *ngIf="dobForm.get('dob').errors?.pattern && !dobForm.get('dob').errors?.dobIncorrect && isLength10">D.O.B should only contain numbers</span>
                     </p>
                 </div>
 
